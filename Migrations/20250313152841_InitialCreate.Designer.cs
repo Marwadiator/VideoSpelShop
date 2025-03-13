@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VideoSpelShop.Data;
 
@@ -11,9 +12,11 @@ using VideoSpelShop.Data;
 namespace VideoSpelShop.Migrations
 {
     [DbContext(typeof(VideoSpelShopDbContext))]
-    partial class VideoSpelShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250313152841_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,36 +53,19 @@ namespace VideoSpelShop.Migrations
 
             modelBuilder.Entity("VideoSpelShop.Models.Category", b =>
                 {
-                    b.Property<int>("CategoryId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CategoryId");
+                    b.HasKey("Id");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = 1,
-                            Name = "Action"
-                        },
-                        new
-                        {
-                            CategoryId = 2,
-                            Name = "Adventure"
-                        },
-                        new
-                        {
-                            CategoryId = 3,
-                            Name = "RPG"
-                        });
                 });
 
             modelBuilder.Entity("VideoSpelShop.Models.Customer", b =>
@@ -105,11 +91,11 @@ namespace VideoSpelShop.Migrations
 
             modelBuilder.Entity("VideoSpelShop.Models.Game", b =>
                 {
-                    b.Property<int>("GameId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GameId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -125,37 +111,11 @@ namespace VideoSpelShop.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("GameId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Games");
-
-                    b.HasData(
-                        new
-                        {
-                            GameId = 1,
-                            CategoryId = 3,
-                            Genre = "RPG",
-                            Name = "The Witcher 3",
-                            Price = 39.99m
-                        },
-                        new
-                        {
-                            GameId = 2,
-                            CategoryId = 3,
-                            Genre = "RPG",
-                            Name = "Cyberpunk 2077",
-                            Price = 59.99m
-                        },
-                        new
-                        {
-                            GameId = 3,
-                            CategoryId = 1,
-                            Genre = "Action",
-                            Name = "God of War",
-                            Price = 49.99m
-                        });
                 });
 
             modelBuilder.Entity("VideoSpelShop.Models.Order", b =>

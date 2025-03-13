@@ -1,18 +1,25 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VideoSpelShop.Models
 {
     public class Game
     {
         [Key]
-        public int Id { get; set; }
+        public int GameId { get; set; }
 
         [Required]
-        public string? Name { get; set; }  // Allows NULL
+        public string Name { get; set; }
 
         [Required]
-        public string? Genre { get; set; }  // Allows NULL
+        public string Genre { get; set; }
 
-        public decimal? Price { get; set; }  // Allows NULL
+        [Required]
+        public decimal Price { get; set; }
+
+        // Foreign Key for Category
+        [ForeignKey("Category")]
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
     }
 }
